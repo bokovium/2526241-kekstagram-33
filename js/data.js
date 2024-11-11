@@ -7,23 +7,21 @@ import { createRandomCommentId } from './comment-avatar-id.js';
 import { NAME } from './name';
 import { MESSAGE } from './message';
 
-/*const createComment = () => ({id:createRandomCommentId(),
-  avatar:`img/avatar- ${createRandomAvatarId()}.svg`,
+const createComment = () => ({
+  id:createRandomCommentId(),
+  avatar:`img/avatar-${createRandomAvatarId()}.svg`,
   message:getRandomArrayElement(MESSAGE),
   name:getRandomArrayElement(NAME)
-});*/
+});
 
-const PROFILE_PHOTO = () => ({id:createId() ,
+const profilePhoto = () => ({
+  id:createId() ,
   url: `photos/${createUrlId()}.jpg` ,
   description:'Прекрасный летний вечер',
   likes:getRandomInteger(15,200),
-  comments:{id:createRandomCommentId(),
-    avatar:`img/avatar- ${createRandomAvatarId()}.svg`,
-    message:getRandomArrayElement(MESSAGE),
-    name:getRandomArrayElement(NAME)
-  }
+  comments:Array.from({length:getRandomInteger(0,30)},createComment)
 });
 
-const profilePhotosMassive = () => Array.from({length:4},PROFILE_PHOTO);
+const profilePhotosMassive = () => Array.from({length:8},profilePhoto);
 
 export {profilePhotosMassive};

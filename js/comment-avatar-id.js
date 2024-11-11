@@ -6,6 +6,10 @@ const createCommentAndAvatarId = function (a,b) {
     let currentId = getRandomInteger(a,b);
     while (previousId.includes(currentId)) {
       currentId = getRandomInteger(a,b);
+      if (previousId.length >= b - a) {
+        return a;
+      }
+
     }
     previousId.push(currentId);
     return currentId;
