@@ -62,7 +62,7 @@ const openBigPicture = (photo) => {
 };
 
 // Закрытие модального окна
-const closeBigPicture = () => {
+export const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscClose);

@@ -1,5 +1,5 @@
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-const imageUploadInput = document.querySelector('.img-upload__input');
+export const imageUploadInput = document.querySelector('.img-upload__input');
 
 export const effectsPreviews = document.querySelectorAll('.effects__preview');
 

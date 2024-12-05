@@ -4,11 +4,14 @@ import { openSuccefulMessage } from './modal-settings.js';
 import { resetSettings } from './reset-settings.js';
 
 const uploadButton = document.querySelector('.img-upload__submit');
+export const imgOverlay = document.querySelector('.img-upload__overlay');
+export const uploadFileInput = document.querySelector('#upload-file');
 
-const imageUploadButton = document.querySelector('.img-upload__label');
-imageUploadButton.addEventListener('click',() => {
+uploadFileInput.addEventListener('change', () => {
   resetFilter();
-  document.querySelector('.img-upload__overlay').classList.remove('hidden');
+  imgOverlay.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
 });
 
 const HASHTAG_MAX_LENGTH = 19;

@@ -2,6 +2,8 @@ import { resetFilter } from './photo-filters';
 import { resetSettings } from './reset-settings';
 
 const imgUploadPreviwButtonClose = document.querySelector('.img-upload__cancel');
+const commentField = document.querySelector('.text__description');
+const hashtagField = document.querySelector('.text__hashtags');
 
 export const openSuccefulMessage = () => {
   // Клонируем шаблон сообщения
@@ -40,11 +42,22 @@ export const openSuccefulMessage = () => {
 
 imgUploadPreviwButtonClose.addEventListener('click',() => {
   document.querySelector('.img-upload__overlay').classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  resetSettings();
 });
 
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
+    if (document.activeElement === commentField) {
+      return;
+    }
+    if (document.activeElement === hashtagField){
+      return;
+    }
     document.querySelector('.img-upload__overlay').classList.add('hidden');
+    document.body.classList.remove('modal-open');
+    resetSettings();
+    evt.preventDefault();
   }
 });
 
