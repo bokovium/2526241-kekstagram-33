@@ -2,6 +2,7 @@ import { resetFilter } from './photo-filters.js';
 import { sendData } from './server.js';
 import { openSuccefulMessage } from './modal-settings.js';
 import { resetSettings } from './reset-settings.js';
+import { showErrorMessage } from './modal-settings.js';
 
 const uploadButton = document.querySelector('.img-upload__submit');
 export const imgOverlay = document.querySelector('.img-upload__overlay');
@@ -74,14 +75,30 @@ const validation = () => {
 
 validation();
 
-uploadFormElement.addEventListener('submit', (evt) => {
+uploadFormElement.addEventListener('submit', async (evt) => {
   evt.preventDefault();
+  document.body.classList.add('modal-open');
   const isValid = validator.validate();
-
   if (isValid) {
-    uploadButton.disabled = true;
-    sendData(new FormData(evt.target));
-    openSuccefulMessage();
-    resetSettings();
+    uploadButton.disabled = true; //Блокирование кнопки отправки
+    uploadButton.textContent = 'Отправка...';
+
+    try {
+      await sendData(new FormData(evt.target)); //Отправка данных
+
+      openSuccefulMessage(); //Показ сообщения об успехе
+
+      resetSettings(); //Сброс формы
+
+      imgOverlay.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+
+    } catch (error) {
+
+      showErrorMessage(); //Показ сообщения с ошибкой
+    } finally {
+      uploadButton.disabled = false; //Разблокирование кнопки
+      uploadButton.textContent = 'Отправить';
+    }
   }
 });

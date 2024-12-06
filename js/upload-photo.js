@@ -1,6 +1,5 @@
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 export const imageUploadInput = document.querySelector('.img-upload__input');
-
 export const effectsPreviews = document.querySelectorAll('.effects__preview');
 
 import { imgUploadPreview } from './scale-photo.js';
